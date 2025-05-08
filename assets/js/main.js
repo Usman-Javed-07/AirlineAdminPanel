@@ -48,19 +48,18 @@ async function loadFlights() {
       return;
     }
 
-    const rows = flights.map(
-      (f) => `
-        <tr>
-          <td>${f.id}</td>
-          <td>${f.route}</td>
-          <td>${f.date}</td>
-          <td>${f.departure_time} - ${f.arrival_time}</td>
-          <td>${f.vessel}</td>
-          <td>£${f.economy_price}</td>
-          <td>£${f.business_price}</td>
-          <td>£${f.first_price}</td>
-        </tr>`
-    ).join("");
+    const rows = flights.map((f) => `
+      <tr>
+        <td>${f.id}</td>
+        <td>${f.route}</td>
+        <td>${f.date}</td>
+        <td>${f.departure_time}</td> 
+        <td> ${f.arrival_time} </td>
+        <td>${f.vessel}</td>
+        <td>£${f.economy_price}</td>
+        <td>£${f.business_price}</td>
+        <td>£${f.first_price}</td>
+      </tr>`).join("");
 
     tableContainer.innerHTML = `
       <table>
@@ -69,7 +68,8 @@ async function loadFlights() {
             <th>ID</th>
             <th>Route</th>
             <th>Date</th>
-            <th>Time</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
             <th>Vessel</th>
             <th>Economy</th>
             <th>Business</th>
@@ -84,13 +84,19 @@ async function loadFlights() {
   }
 }
 
+// 🚨 Make sure this is at the bottom
+document.addEventListener("DOMContentLoaded", () => {
+  loadFlights();
+});
+
+
 // Load bookings (on manage-bookings.html)
 async function loadBookings() {
   const table = document.getElementById("bookingsTable");
   if (!table) return;
 
   try {
-    const res = await fetch("/api/bookings");
+    const res = await fetch("http://localhost:5000/api/bookings");
     const bookings = await res.json();
 
     const tbody = table.querySelector("tbody");
@@ -117,7 +123,7 @@ async function cancelBooking(bookingId) {
   if (!confirmed) return;
 
   try {
-    const res = await fetch(`/api/bookings/${bookingId}`, {
+    const res = await fetch(`http://localhost:5000/api/bookings/${bookingId}`, {
       method: "DELETE",
     });
     const data = await res.json();
@@ -144,7 +150,7 @@ if (reportForm) {
     const to = formData.get("to");
 
     try {
-      const res = await fetch(`/api/reports?from=${from}&to=${to}`);
+      const res = await fetch(`http://localhost:5000/api/reports?from=${from}&to=${to}`);
       const report = await res.json();
 
       document.getElementById("reportResults").innerHTML = `
