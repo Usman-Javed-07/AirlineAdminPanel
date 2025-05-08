@@ -49,17 +49,19 @@ async function loadFlights() {
     }
 
     const rows = flights.map((f) => `
-      <tr>
+      <tr data-id="${f.id}">
         <td>${f.id}</td>
         <td>${f.route}</td>
-        <td>${f.date}</td>
-        <td>${f.departure_time}</td> 
-        <td> ${f.arrival_time} </td>
+        <td><input type="date" value="${f.date}" class="edit-date" /></td>
+        <td><input type="time" value="${f.departure_time}" class="edit-departure" /></td>
+        <td><input type="time" value="${f.arrival_time}" class="edit-arrival" /></td>
         <td>${f.vessel}</td>
-        <td>£${f.economy_price}</td>
-        <td>£${f.business_price}</td>
-        <td>£${f.first_price}</td>
-      </tr>`).join("");
+        <td><input type="number" value="${f.economy_price}" class="edit-economy" /></td>
+        <td><input type="number" value="${f.business_price}" class="edit-business" /></td>
+        <td><input type="number" value="${f.first_price}" class="edit-first" /></td>
+        <td><button class="update-btn">Update</button></td>
+      </tr>
+    `).join("");
 
     tableContainer.innerHTML = `
       <table>
@@ -74,15 +76,55 @@ async function loadFlights() {
             <th>Economy</th>
             <th>Business</th>
             <th>First</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>${rows}</tbody>
-      </table>`;
+      </table>
+    `;
+
+    // Attach update event listeners
+    document.querySelectorAll(".update-btn").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const row = btn.closest("tr");
+        const flightId = row.dataset.id;
+
+        const updatedData = {
+          date: row.querySelector(".edit-date").value,
+          departure_time: row.querySelector(".edit-departure").value,
+          arrival_time: row.querySelector(".edit-arrival").value,
+          economy_price: parseFloat(row.querySelector(".edit-economy").value),
+          business_price: parseFloat(row.querySelector(".edit-business").value),
+          first_price: parseFloat(row.querySelector(".edit-first").value),
+        };
+
+        try {
+          const res = await fetch(`http://localhost:5000/api/flights/${flightId}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedData),
+          });
+
+          if (res.ok) {
+            alert("Flight updated successfully!");
+          } else {
+            alert("Failed to update flight.");
+          }
+        } catch (err) {
+          console.error("Update error:", err);
+          alert("Error updating flight.");
+        }
+      });
+    });
+
   } catch (err) {
     console.error(err);
     tableContainer.innerHTML = "<p>Error loading flights</p>";
   }
 }
+
 
 // 🚨 Make sure this is at the bottom
 document.addEventListener("DOMContentLoaded", () => {
