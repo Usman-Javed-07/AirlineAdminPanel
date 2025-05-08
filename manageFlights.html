@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manage Flights</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <h2>Flight Schedule Management</h2>
+
+  <form id="flightForm">
+    <input type="text" name="route" placeholder="Route (e.g. London - Delhi)" required />
+    <input type="date" name="date" required />
+    <input type="time" name="departure_time" required />
+    <input type="time" name="arrival_time" required />
+    <input type="text" name="vessel" placeholder="Vessel Name" required />
+    <input type="number" name="economy_price" placeholder="Economy Price (£)" required />
+    <input type="number" name="business_price" placeholder="Business Price (£)" required />
+    <input type="number" name="first_price" placeholder="First Class Price (£)" required />
+    <button type="submit">Add Flight</button>
+  </form>
+
+  <div id="flightsTable"></div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
