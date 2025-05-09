@@ -14,6 +14,9 @@ if (flightForm) {
       economy_price: formData.get("economy_price"),
       business_price: formData.get("business_price"),
       first_price: formData.get("first_price"),
+     pickup_cities: formData.get("pickup_cities")?.split(/\s+/).map(city => city.trim().toLowerCase()),
+dropoff_cities: formData.get("dropoff_cities")?.split(/\s+/).map(city => city.trim().toLowerCase())
+
     };
 
     try {
@@ -59,6 +62,9 @@ async function loadFlights() {
         <td><input type="number" value="${f.economy_price}" class="edit-economy" /></td>
         <td><input type="number" value="${f.business_price}" class="edit-business" /></td>
         <td><input type="number" value="${f.first_price}" class="edit-first" /></td>
+
+
+
         <td><button class="update-btn">Update</button></td>
       </tr>
     `).join("");
@@ -76,6 +82,8 @@ async function loadFlights() {
             <th>Economy</th>
             <th>Business</th>
             <th>First</th>
+           
+
             <th>Action</th>
           </tr>
         </thead>
@@ -96,6 +104,7 @@ async function loadFlights() {
           economy_price: parseFloat(row.querySelector(".edit-economy").value),
           business_price: parseFloat(row.querySelector(".edit-business").value),
           first_price: parseFloat(row.querySelector(".edit-first").value),
+         
         };
 
         try {
