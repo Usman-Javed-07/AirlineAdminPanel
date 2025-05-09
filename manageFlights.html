@@ -7,23 +7,52 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
-  <h2>Flight Schedule Management</h2>
+   <div class="dashboard">
+     <h1>Flight Schedule Management</h1>
+    <nav>
+      <ul>
+        <li><a href="dashboard.html">Home</a></li>
+        <li><a href="manageFlights.html">Manage Flights</a></li>
+        <li><a href="manageBooking.html">Manage Bookings</a></li>
+        <li><a href="reports.html">View Reports</a></li>
+      </ul>
+    </nav>
+  </div>
 
   <form id="flightForm">
-    <input type="text" name="route" placeholder="Route (e.g. London - Delhi)" required />
-    <input type="date" name="date" required />
-    <input type="time" name="departure_time" required />
-    <input type="time" name="arrival_time" required />
-    <input type="text" name="vessel" placeholder="Vessel Name" required />
-    <input type="number" name="economy_price" placeholder="Economy Price (£)" required />
-    <input type="number" name="business_price" placeholder="Business Price (£)" required />
-    <input type="number" name="first_price" placeholder="First Class Price (£)" required />
-  
-     <input type="text" name="pickup_cities" placeholder="Pickup Cities (comma-separated)" />
-     <input type="text" name="dropoff_cities" placeholder="Dropoff Cities (comma-separated)" />
+  <label for="route">Route:</label>
+  <input type="text" id="route" name="route" placeholder="Route (e.g. London - Delhi)" required />
 
-    <button type="submit">Add Flight</button>
-  </form>
+  <label for="date">Date:</label>
+  <input type="date" id="date" name="date" required />
+
+  <label for="departure_time">Departure Time:</label>
+  <input type="time" id="departure_time" name="departure_time" required />
+
+  <label for="arrival_time">Arrival Time:</label>
+  <input type="time" id="arrival_time" name="arrival_time" required />
+
+  <label for="vessel">Vessel Name:</label>
+  <input type="text" id="vessel" name="vessel" placeholder="Vessel Name" required />
+
+  <label for="economy_price">Economy Price:</label>
+  <input type="number" id="economy_price" name="economy_price" placeholder="Economy Price (£)" required />
+
+  <label for="business_price">Business Price:</label>
+  <input type="number" id="business_price" name="business_price" placeholder="Business Price (£)" required />
+
+  <label for="first_price">First Class Price:</label>
+  <input type="number" id="first_price" name="first_price" placeholder="First Class Price (£)" required />
+
+  <label for="pickup_cities">Pickup Cities:</label>
+  <input type="text" id="pickup_cities" name="pickup_cities" placeholder="Pickup Cities (comma-separated)" />
+
+  <label for="dropoff_cities">Dropoff Cities:</label>
+  <input type="text" id="dropoff_cities" name="dropoff_cities" placeholder="Dropoff Cities (comma-separated)" />
+
+  <button type="submit">Add Flight</button>
+</form>
+
 
   <div id="flightsTable"></div>
 
