@@ -40,6 +40,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           <td>${booking.card_expiry}</td>
           <td>${booking.status}</td>
           <td><button class="${cancelClass}" data-id="${booking.booking_id}" ${cancelDisabled}>Cancel</button></td>
+          <td>${booking.cancelled_by || "-"}</td>
+
         `;
 
         tableBody.appendChild(tr);
