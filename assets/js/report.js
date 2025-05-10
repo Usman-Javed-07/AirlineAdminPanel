@@ -66,3 +66,29 @@ async function generateReport() {
 }
 
 
+async function downloadPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  // Grab the table body
+  const table = document.getElementById("bookingTableBody");
+  
+  // Get all rows from the table
+  const rows = Array.from(table.querySelectorAll("tr")).map(tr => {
+    return Array.from(tr.children).map(td => td.textContent); // Get all cell values in the row
+  });
+
+  // Set table headers
+  const headers = ['Booking ID', 'Name', 'Checked In', 'Price (£)'];
+
+  // Generate the table in the PDF
+  doc.autoTable({
+    head: [headers],
+    body: rows,
+    startY: 20, // Adjust this to fit your table in the page
+  });
+
+  // Save the generated PDF
+  doc.save('Flight_Report.pdf');
+}
+
