@@ -14,25 +14,44 @@ if (flightForm) {
       economy_price: formData.get("economy_price"),
       business_price: formData.get("business_price"),
       first_price: formData.get("first_price"),
-     pickup_cities: formData.get("pickup_cities")?.split(/\s+/).map(city => city.trim().toLowerCase()),
-dropoff_cities: formData.get("dropoff_cities")?.split(/\s+/).map(city => city.trim().toLowerCase())
-
+      pickup_cities: formData
+        .get("pickup_cities")
+        ?.split(/\s+/)
+        .map((city) => city.trim().toLowerCase()),
+      dropoff_cities: formData
+        .get("dropoff_cities")
+        ?.split(/\s+/)
+        .map((city) => city.trim().toLowerCase()),
     };
 
     try {
-      
       const res = await fetch(`${BASE_URL}/flights`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(flight),
       });
       const data = await res.json();
-      alert(data.message || "Flight added successfully");
+      Toastify({
+        text: data.message || "Flight added successfully",
+        duration: 3000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#4CAF50",
+        close: true,
+      }).showToast();
+
       flightForm.reset();
-      loadFlights(); // Optional: refresh flight table
+      loadFlights();
     } catch (err) {
       console.error(err);
-      alert("Failed to add flight");
+      Toastify({
+        text: "Failed to add flight",
+        duration: 3000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#f44336",
+        close: true,
+      }).showToast();
     }
   });
 }
@@ -51,7 +70,9 @@ async function loadFlights() {
       return;
     }
 
-    const rows = flights.map((f) => `
+    const rows = flights
+      .map(
+        (f) => `
       <tr data-id="${f.id}">
         <td>${f.id}</td>
         <td>${f.route}</td>
@@ -67,7 +88,9 @@ async function loadFlights() {
 
         <td><button class="update-btn">Update</button></td>
       </tr>
-    `).join("");
+    `
+      )
+      .join("");
 
     tableContainer.innerHTML = `
       <table>
@@ -104,7 +127,6 @@ async function loadFlights() {
           economy_price: parseFloat(row.querySelector(".edit-economy").value),
           business_price: parseFloat(row.querySelector(".edit-business").value),
           first_price: parseFloat(row.querySelector(".edit-first").value),
-         
         };
 
         try {
@@ -117,29 +139,47 @@ async function loadFlights() {
           });
 
           if (res.ok) {
-            alert("Flight updated successfully!");
+            Toastify({
+              text: "Flight updated successfully!",
+              duration: 3000,
+              gravity: "top",
+              position: "right",
+              backgroundColor: "#4CAF50",
+              close: true,
+            }).showToast();
           } else {
-            alert("Failed to update flight.");
+            Toastify({
+              text: "Failed to update flight.",
+              duration: 3000,
+              gravity: "top",
+              position: "right",
+              backgroundColor: "#f44336",
+              close: true,
+            }).showToast();
           }
         } catch (err) {
           console.error("Update error:", err);
-          alert("Error updating flight.");
+          Toastify({
+            text: "Error updating flight.",
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "#f44336",
+            close: true,
+          }).showToast();
         }
       });
     });
-
   } catch (err) {
     console.error(err);
     tableContainer.innerHTML = "<p>Error loading flights</p>";
   }
 }
 
-
 // 🚨 Make sure this is at the bottom
 document.addEventListener("DOMContentLoaded", () => {
   loadFlights();
 });
-
 
 // Load bookings (on manage-bookings.html)
 async function loadBookings() {
@@ -151,8 +191,9 @@ async function loadBookings() {
     const bookings = await res.json();
 
     const tbody = table.querySelector("tbody");
-    tbody.innerHTML = bookings.map(
-      (b) => `
+    tbody.innerHTML = bookings
+      .map(
+        (b) => `
         <tr>
           <td>${b.id}</td>
           <td>${b.passenger_name}</td>
@@ -161,10 +202,18 @@ async function loadBookings() {
           <td><button onclick="modifyBooking(${b.id})">Modify</button></td>
           <td><button onclick="cancelBooking(${b.id})">Cancel</button></td>
         </tr>`
-    ).join("");
+      )
+      .join("");
   } catch (err) {
     console.error(err);
-    alert("Failed to load bookings");
+    Toastify({
+      text: "Failed to load bookings",
+      duration: 3000,
+      gravity: "top",
+      position: "right",
+      backgroundColor: "#f44336",
+      close: true,
+    }).showToast();
   }
 }
 
@@ -178,17 +227,39 @@ async function cancelBooking(bookingId) {
       method: "DELETE",
     });
     const data = await res.json();
-    alert(data.message || "Booking cancelled");
-    loadBookings(); // Refresh list
+    Toastify({
+      text: data.message || "Booking cancelled",
+      duration: 3000,
+      gravity: "top",
+      position: "right",
+      backgroundColor: "#f44336",
+      close: true,
+    }).showToast();
+
+    loadBookings();
   } catch (err) {
     console.error(err);
-    alert("Failed to cancel booking");
+    Toastify({
+      text: "Failed to cancel booking",
+      duration: 3000,
+      gravity: "top",
+      position: "right",
+      backgroundColor: "#f44336",
+      close: true,
+    }).showToast();
   }
 }
 
 // Placeholder for modifying booking
 function modifyBooking(id) {
-  alert("Modify booking #" + id + " (not implemented)");
+  Toastify({
+    text: "Modify booking #" + id + " (not implemented)",
+    duration: 3000,
+    gravity: "top",
+    position: "right",
+    backgroundColor: "#ff9800",
+    close: true,
+  }).showToast();
 }
 
 // Handle report generation
@@ -213,7 +284,14 @@ if (reportForm) {
       `;
     } catch (err) {
       console.error(err);
-      alert("Failed to generate report");
+      Toastify({
+        text: "Failed to generate report",
+        duration: 3000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#f44336",
+        close: true,
+      }).showToast();
     }
   });
 }

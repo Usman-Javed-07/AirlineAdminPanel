@@ -5,7 +5,7 @@
       const data = await res.json();
 
       const container = document.getElementById("luggageList");
-      container.innerHTML = ""; // clear any existing items
+      container.innerHTML = ""; 
 
       data.forEach((item) => {
         const div = document.createElement("div");
@@ -28,6 +28,5 @@
     }
   }
 
-  // Call it when the page loads
   window.onload = fetchLuggageData;
 
