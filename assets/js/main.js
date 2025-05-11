@@ -21,7 +21,7 @@ dropoff_cities: formData.get("dropoff_cities")?.split(/\s+/).map(city => city.tr
 
     try {
       
-      const res = await fetch("http://localhost:5000/api/flights", {
+      const res = await fetch(`${BASE_URL}/flights`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(flight),
@@ -43,7 +43,7 @@ async function loadFlights() {
   if (!tableContainer) return;
 
   try {
-    const res = await fetch("http://localhost:5000/api/flights");
+    const res = await fetch(`${BASE_URL}/flights`);
     const flights = await res.json();
 
     if (flights.length === 0) {
@@ -108,7 +108,7 @@ async function loadFlights() {
         };
 
         try {
-          const res = await fetch(`http://localhost:5000/api/flights/${flightId}`, {
+          const res = await fetch(`${BASE_URL}/flights/${flightId}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
@@ -147,7 +147,7 @@ async function loadBookings() {
   if (!table) return;
 
   try {
-    const res = await fetch("http://localhost:5000/api/bookings");
+    const res = await fetch(`${BASE_URL}/bookings`);
     const bookings = await res.json();
 
     const tbody = table.querySelector("tbody");
@@ -174,7 +174,7 @@ async function cancelBooking(bookingId) {
   if (!confirmed) return;
 
   try {
-    const res = await fetch(`http://localhost:5000/api/bookings/${bookingId}`, {
+    const res = await fetch(`${BASE_URL}/bookings/${bookingId}`, {
       method: "DELETE",
     });
     const data = await res.json();
@@ -201,7 +201,7 @@ if (reportForm) {
     const to = formData.get("to");
 
     try {
-      const res = await fetch(`http://localhost:5000/api/reports?from=${from}&to=${to}`);
+      const res = await fetch(`${BASE_URL}/reports?from=${from}&to=${to}`);
       const report = await res.json();
 
       document.getElementById("reportResults").innerHTML = `

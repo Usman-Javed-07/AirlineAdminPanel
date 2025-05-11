@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const routeSelect = document.getElementById("routeInput");
 
   try {
-    const res = await fetch("http://localhost:5000/api/flights");
+    const res = await fetch(`${BASE_URL}/flights`);
     flightData = await res.json();
 
     const routes = [...new Set(flightData.map(f => f.route))];
@@ -32,7 +32,7 @@ async function generateReport() {
   }
 
   try {
-    const res = await fetch(`http://localhost:5000/api/bookings/report/${encodeURIComponent(route)}`);
+    const res = await fetch(`${BASE_URL}/bookings/report/${encodeURIComponent(route)}`);
     const data = await res.json();
 
     if (res.ok) {

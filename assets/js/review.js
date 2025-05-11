@@ -3,7 +3,7 @@
       const container = document.getElementById("reviewList");
 
       try {
-        const res = await fetch("http://localhost:5000/api/reviews");
+        const res = await fetch(`${BASE_URL}/reviews`);
         const reviews = await res.json();
 
         if (reviews.length === 0) {
