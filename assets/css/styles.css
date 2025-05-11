@@ -331,3 +331,53 @@ footer {
   display: flex;
   margin-left: 160px;
 }
+
+
+.booking-card {
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  margin: 15px auto;
+  max-width: 800px;
+  font-family: 'Segoe UI', sans-serif;
+  transition: transform 0.3s ease;
+}
+
+.booking-card:hover {
+  transform: translateY(-3px);
+}
+
+.booking-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  align-items: center;
+  white-space:  nowrap;
+}
+
+.booking-item {
+  font-size: 15px;
+  color: #333;
+  background: #f7f7f7;
+  padding: 10px 12px;
+  text-align: center;
+}
+
+hr {
+  margin-top: 20px;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 768px) {
+  .booking-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .booking-grid {
+    grid-template-columns: 1fr;
+  }
+}
