@@ -36,12 +36,17 @@
   </div>
 
   <div id="reportSection" style="display: none; margin-top: 20px;">
-    <h3>Report for: <span id="routeName"></span></h3>
-    <p>✅ Made it: <span id="madeIt"></span></p>
-    <p>❌ Missed it: <span id="missedIt"></span></p>
-    <p>💷 Total Paid: £<span id="totalPaid"></span></p>
+   <div class="report-card">
+  <h3>📊 Report for: <span id="routeName">London - Manchester</span></h3>
+  <div class="report-stats">
+    <p><span class="icon success">✅</span> Made it: <span id="madeIt">12</span></p>
+    <p><span class="icon fail">❌</span> Missed it: <span id="missedIt">3</span></p>
+    <p><span class="icon pay">💷</span> Total Paid: £<span id="totalPaid">145.00</span></p>
+  </div>
+</div>
 
-    <table border="1" cellpadding="5" style="margin-top: 10px;">
+
+    <table border="1" cellpadding="5" style="margin-top: 10px; max-width: 1200px; margin: 0 auto; padding: 20px;" >
       <thead>
         <tr>
           <th>Booking ID</th>
@@ -52,7 +57,10 @@
       </thead>
       <tbody id="bookingTableBody"></tbody>
     </table>
-    <button onclick="downloadPDF()">Download Report</button>
+    <div class="downloadPDF">
+
+      <button onclick="downloadPDF()">Download Report</button>
+    </div>
   </div>
           <footer>
     <p class="footer-p">&copy; 2025 Airline Portal</p>
