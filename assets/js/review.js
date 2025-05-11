@@ -18,12 +18,17 @@
           div.style.border = "1px solid #ccc";
           div.style.margin = "10px 0";
           div.style.padding = "10px";
-          div.innerHTML = `
-            <strong>User:</strong> ${review.username} (${review.email})<br>
-            <strong>Vessel:</strong> ${review.vessel}<br>
-            <strong>Rating:</strong> ${review.rating} / 5<br>
-            <strong>Comments:</strong> ${review.comments}
-          `;
+         div.classList.add('review-card');
+div.innerHTML = `
+  <div class="review-header">
+    <h3>${review.username}</h3>
+    <span class="user-email">&lt;${review.email}&gt;</span>
+  </div>
+  <p><strong>Vessel:</strong> ${review.vessel}</p>
+  <p><strong>Rating:</strong> ⭐ ${review.rating} / 5</p>
+  <p><strong>Comments:</strong><br>${review.comments}</p>
+`;
+
           container.appendChild(div);
         });
 
