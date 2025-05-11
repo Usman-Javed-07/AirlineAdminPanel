@@ -27,7 +27,15 @@ async function generateReport() {
   console.log("Selected Route:", route);
 
   if (!route) {
-    alert("Please select a flight route.");
+   Toastify({
+  text: "Please select a flight route.",
+  duration: 3000,
+  gravity: "top",
+  position: "right",
+  backgroundColor: "#f44336",
+  close: true,
+}).showToast();
+
     return;
   }
 
@@ -57,11 +65,27 @@ async function generateReport() {
 
       document.getElementById("reportSection").style.display = "block";
     } else {
-      alert("Error: " + (data.error || "Failed to fetch report"));
+      Toastify({
+  text: "Error: " + (data.error || "Failed to fetch report"),
+  duration: 3000,
+  gravity: "top",
+  position: "right",
+  backgroundColor: "#f44336",
+  close: true,
+}).showToast();
+
     }
   } catch (err) {
     console.error("Fetch error:", err);
-    alert("Server error occurred while fetching the report.");
+    Toastify({
+  text: "Server error occurred while fetching the report.",
+  duration: 3000,
+  gravity: "top",
+  position: "right",
+  backgroundColor: "#f44336", 
+  close: true,
+}).showToast();
+
   }
 }
 
@@ -69,26 +93,19 @@ async function generateReport() {
 async function downloadPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
-
-  // Grab the table body
   const table = document.getElementById("bookingTableBody");
   
-  // Get all rows from the table
   const rows = Array.from(table.querySelectorAll("tr")).map(tr => {
-    return Array.from(tr.children).map(td => td.textContent); // Get all cell values in the row
+    return Array.from(tr.children).map(td => td.textContent); 
   });
 
-  // Set table headers
   const headers = ['Booking ID', 'Name', 'Checked In', 'Price (£)'];
 
-  // Generate the table in the PDF
   doc.autoTable({
     head: [headers],
     body: rows,
-    startY: 20, // Adjust this to fit your table in the page
+    startY: 20, 
   });
-
-  // Save the generated PDF
   doc.save('Flight_Report.pdf');
 }
 
