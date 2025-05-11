@@ -74,18 +74,51 @@ function maskCard(cardNumber) {
 document.addEventListener("click", async (e) => {
   if (e.target.classList.contains("cancel-btn") && !e.target.disabled) {
     const bookingId = e.target.dataset.id;
-    if (confirm(`Cancel booking ${bookingId}?`)) {
+
+    try {
       const res = await fetch(`${BASE_URL}/cancel`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ bookingId })
+        body: JSON.stringify({ bookingId }),
       });
+
       const result = await res.json();
-      alert(result.message || result.error);
-      location.reload();
+
+      Toastify({
+        text: result.message || result.error,
+        duration: 3000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: result.error ? "#f44336" : "#4CAF50",
+        close: true,
+      }).showToast();
+
+      if (!result.error) {
+        // Update UI after cancellation
+        const row = e.target.closest("tr");
+        const statusCell = row.children[23];
+
+        // Update status text
+        statusCell.textContent = "cancelled";
+
+        // Disable cancel button
+        e.target.disabled = true;
+        e.target.classList.add("disabled-btn");
+      }
+
+    } catch (err) {
+      Toastify({
+        text: "Something went wrong while cancelling.",
+        duration: 3000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#f44336",
+        close: true,
+      }).showToast();
     }
   }
 });
+
 
 function formatDate(dateStr) {
   const date = new Date(dateStr);
