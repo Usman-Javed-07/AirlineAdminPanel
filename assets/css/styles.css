@@ -79,10 +79,12 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 15px;
+  margin-bottom: 40px;
 }
 .table-scroll {
   max-width: 1400px;
   margin:  0 auto;
+  margin-bottom: 50px;
 }
 table th,
 table td {
@@ -160,6 +162,7 @@ form label {
   padding: 30px;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 50px;
 }
 
 
@@ -219,16 +222,46 @@ form label {
     font-size: 0.85rem;
   }
 }
+.footer-p {
+  margin: 0px !important;
+}
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background-color: #0044cc;
+  color: white;
+  padding: 14px 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px !important;
+}
 
-  footer {
-    text-align: center;
-    background-color: #0044cc;
-    color: white;
-    padding: 2px 0px;
-    width: 100%;
-    bottom: 0;
-  }
   .logo-image {
     width: 60px;
     height: 60px;
   }
+
+  .report-form {
+  background-color: #fff;
+  padding: 50px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.generate-report {
+  padding: 0px !important;
+  box-shadow: none !important;
+}
+#reportSection {
+  margin-bottom: 60px;
+}
+#luggageList {
+  margin-bottom: 60px;
+}

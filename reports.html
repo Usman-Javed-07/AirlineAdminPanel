@@ -25,12 +25,15 @@
          <h1>Generate Flight Route Report</h1>
     </nav>
   </div>
-
+  <div class="report-form">
+<form class="generate-report">
   <label for="routeInput">Select Route:</label>
   <select id="routeInput">
-    <option value="">-- Select a route --</option>
+    <option value="">Select a route</option>
   </select>
-  <button onclick="generateReport()">Generate Report</button>
+</form>
+<button onclick="generateReport()">Generate Report</button>
+  </div>
 
   <div id="reportSection" style="display: none; margin-top: 20px;">
     <h3>Report for: <span id="routeName"></span></h3>
@@ -51,7 +54,9 @@
     </table>
     <button onclick="downloadPDF()">Download Report</button>
   </div>
-
+          <footer>
+    <p class="footer-p">&copy; 2025 Airline Portal</p>
+  </footer>
    <script src="./config.js"></script>   
   <script src="./assets/js/report.js"></script>
 </body>
