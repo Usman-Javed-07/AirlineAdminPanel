@@ -212,3 +212,11 @@ form label {
   }
 }
 
+  footer {
+    text-align: center;
+    background-color: #0044cc;
+    color: white;
+    padding: 2px 0px;
+    width: 100%;
+    bottom: 0;
+  }
